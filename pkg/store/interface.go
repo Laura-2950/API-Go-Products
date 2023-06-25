@@ -6,5 +6,8 @@ type StoreInterface interface {
 	Read(id int) (*domain.Product, error)
 	ReadAll() ([]domain.Product, error)
 	Create(product domain.Product) (*domain.Product, error)
+	Update(product domain.Product) (*domain.Product, error)
+	Delete(id int) error
 	Exist(codeValue string) bool
+	ExistId(id int) bool
 }

@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+
 	db, err := sql.Open("mysql", "laura:secret@tcp(localhost:33060)/my_db")
 	if err != nil {
 		panic(err.Error())
@@ -33,6 +34,9 @@ func main() {
 	productGroup := r.Group("/products")
 	{
 		productGroup.GET(":id", prodHandler.GetById)
+		productGroup.GET("", prodHandler.GetAll)
+		productGroup.POST("", prodHandler.NewProduct)
+		productGroup.DELETE(":id", prodHandler.Delete)
 	}
 
 	r.Run(":8080")
