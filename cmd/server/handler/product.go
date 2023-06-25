@@ -37,7 +37,17 @@ func (h *ProductHandler) GetById(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, &prodFounded)
 }
 
-func (h *ProductHandler) GetAll(ctx *gin.Context) {
+// ListProducts godoc
+// @Summary List products
+// @Tags Products
+// @Description Get all products
+// @Accept json
+// @Produce json
+// @Param token header string true "token"
+// @Success 200 {array} domain.Product
+// @failure 500 {string} string "error"
+// @Router /products [get]
+func (h *ProductHandler) GetAll(ctx *gin.Context) {//@success 200 {object} jsonresult.JSONResult{data=[]proto.Order} "desc"
 	prodFounded, err := h.ProductService.GetAllProducts()
 	if err != nil {
 		if errApi, ok := err.(*web.ErrorApi); ok {
