@@ -1,0 +1,38 @@
+CREATE TABLE IF NOT EXISTS products (
+			id INT AUTO_INCREMENT PRIMARY KEY,
+			name VARCHAR(255) NOT NULL,
+			quantity INT NOT NULL,
+			code_value VARCHAR(255) NOT NULL,
+			is_published BOOL DEFAULT false,
+			expiration VARCHAR(255) NOT NULL,
+			price DOUBLE NOT NULL
+		);
+
+INSERT INTO products (name, quantity, code_value, is_published, expiration, price)
+	VALUES ("Oil - Margarine", 439, "S82254D", true, "15/12/2021", 71.42),
+	("Pineapple - Canned, Rings",345,"M4637",true,"09/08/2021",352.79),
+	("Wine - Red Oakridge Merlot",367,"T65812",false,"24/05/2021",179.23),
+	("Cookie - Oatmeal",130,"M7157",false,"28/01/2022",275.47),
+	("Flavouring Vanilla Artificial",336,"S60152S",true,"10/02/2022",839.02),
+	("Cake - Lemon Chiffon",446,"S51821A",true,"06/04/2022",895.88),
+	("Melon - Honey Dew",165,"S52381G",true,"01/06/2021",622.33),
+	("Cut Wakame - Hanawakaba",413,"S93511",true,"22/12/2021",480.54),
+	("Apple - Delicious, Golden",225,"S73046D",true,"02/04/2021",976.27),
+	("Soup Bowl Clear 8oz92008",424,"B180",false,"18/10/2021",92.8),
+	("Sugar - Splenda Sweetener",318,"Y219",true,"06/07/2021",28.98),
+	("Pork - Loin, Center Cut",298,"V9603XA",true,"16/09/2021",224.34),
+	("Cheese - Brick With Onion",87,"A282",false,"17/03/2021",74.58),
+	("Rabbit - Saddles",251,"S4290XS",false,"04/11/2021",420.45),
+	("Puff Pastry - Sheets",266,"T529",false,"30/07/2021",49.29),
+	("Coconut - Whole",416,"H1041",true,"18/05/2021",21.21),
+	("Bread - Petit Baguette",43,"R68",true,"10/03/2022",669.3),
+	("Bread - Petit Baguette",43,"R68",true,"10/03/2022",669.3),
+	("Teriyaki Sauce",354,"S93503",true,"19/05/2021",908.18),
+	("Yoplait - Strawbrasp Peac",45,"I8311",true,"01/08/2021",578.76),
+	("Carrots - Jumbo",266,"S66902D",true,"22/10/2021",300.54),
+	("Ecolab Crystal Fusion",133,"S31834",false,"14/04/2022",939.8),
+	("Lemon Pepper",424,"S53106A",true,"18/03/2022",514.42),
+	("Phyllo Dough",39,"S7001XD",false,"07/07/2021",241.86),
+	("Pesto - Primerba, Paste",85,"S62341D",true,"19/10/2021",961.55),
+	("Tray - 12in Rnd Blk",488,"S56001D",false,"17/12/2021",138.2),
+	("Chicken - Whole",24,"O9823",true,"30/12/2021",141.4);
