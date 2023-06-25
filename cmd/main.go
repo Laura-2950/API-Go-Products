@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"net/http"
 
-	"github.com/Laua-2950/API-Go-Products.git/API-Go-Products/internal/product"
-	"github.com/Laura-250/API-Go-Products.git/API-Go-Products/pkg/store"
 	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/cmd/server/handler"
+	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/internal/product"
+	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/pkg/store"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 )
