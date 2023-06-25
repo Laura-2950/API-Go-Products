@@ -16,3 +16,6 @@ port: 8080
 
 Endpoints:
 - Get Product by ID: http://localhost:8080/products/:id
+- Get All Products: http://localhost:8080/products
+- Post New Product: http://localhost:8080/products
+- Delete Product by ID: http://localhost:8080/products/:id
