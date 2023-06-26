@@ -3,7 +3,7 @@ package store
 import (
 	"database/sql"
 
-	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/internal/domain"
+	"github.com/Laura-2950/API-Go-Products/API-Go-Products/internal/domain"
 )
 
 type SqlStore struct {

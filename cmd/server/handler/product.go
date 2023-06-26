@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/internal/domain"
-	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/internal/product"
-	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/pkg/web"
+	"github.com/Laura-2950/API-Go-Products/API-Go-Products/internal/domain"
+	"github.com/Laura-2950/API-Go-Products/API-Go-Products/internal/product"
+	"github.com/Laura-2950/API-Go-Products/API-Go-Products/pkg/web"
 	"github.com/gin-gonic/gin"
 )
 
@@ -44,10 +44,10 @@ func (h *ProductHandler) GetById(ctx *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param token header string true "token"
-// @Success 200 {array} domain.Product
+// @Success 200 
 // @failure 500 {string} string "error"
 // @Router /products [get]
-func (h *ProductHandler) GetAll(ctx *gin.Context) {//@success 200 {object} jsonresult.JSONResult{data=[]proto.Order} "desc"
+func (h *ProductHandler) GetAll(ctx *gin.Context) { //@success 200 {object} jsonresult.JSONResult{data=[]proto.Order} "desc"
 	prodFounded, err := h.ProductService.GetAllProducts()
 	if err != nil {
 		if errApi, ok := err.(*web.ErrorApi); ok {

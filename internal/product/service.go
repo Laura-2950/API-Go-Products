@@ -1,12 +1,12 @@
 package product
 
-import "github.com/Laura-2950/API-Go-Products.git/API-Go-Products/internal/domain"
+import "github.com/Laura-2950/API-Go-Products/API-Go-Products/internal/domain"
 
 type IService interface {
 	GetProductBy(id int) (*domain.Product, error)
 	GetAllProducts() ([]domain.Product, error)
 	CreateNewProducts(product *domain.Product) (*domain.Product, error)
-	DeleteProduct(id int) (error)
+	DeleteProduct(id int) error
 }
 
 type Service struct {
@@ -37,7 +37,7 @@ func (s *Service) CreateNewProducts(product *domain.Product) (*domain.Product, e
 	return product, nil
 }
 
-func (s *Service) DeleteProduct(id int) (error) {
+func (s *Service) DeleteProduct(id int) error {
 	err := s.Repository.DeleteProduct(id)
 	if err != nil {
 		return err

@@ -1,6 +1,6 @@
 package store
 
-import "github.com/Laura-2950/API-Go-Products.git/API-Go-Products/internal/domain"
+import "github.com/Laura-2950/API-Go-Products/API-Go-Products/internal/domain"
 
 type StoreInterface interface {
 	Read(id int) (*domain.Product, error)

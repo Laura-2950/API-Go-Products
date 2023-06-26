@@ -7,14 +7,12 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/cmd/server/handler"
-	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/internal/product"
-	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/pkg/middleware"
-	"github.com/Laura-2950/API-Go-Products.git/API-Go-Products/pkg/store"
+	"github.com/Laura-2950/API-Go-Products/API-Go-Products/cmd/server/handler"
+	"github.com/Laura-2950/API-Go-Products/API-Go-Products/internal/product"
+	"github.com/Laura-2950/API-Go-Products/API-Go-Products/pkg/store"
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-drive/mysql"
 	"github.com/joho/godotenv"
-	"github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
 )
 
@@ -56,13 +54,14 @@ func main() {
 	serv := product.Service{&repo}
 	prodHandler := handler.ProductHandler{&serv}
 	r := gin.Default()
+
 	r.GET("ping", func(ctx *gin.Context) { ctx.String(http.StatusOK, "pong") })
-			productGroup := r.Group("/products")
-	{ 
+	productGroup := r.Group("/products")
+	{
 		productGroup.GET(":id", prodHandler.GetById)
 		productGroup.GET("", prodHandler.GetAll)
-		productGroup.POST("", middleware.Authentication(), prodHandler.NewProduct)
-		productGroup.DELETE(":id", middleware.Authentication(), prodHandler.Delete)
+		productGroup.POST("", prodHandler.NewProduct)
+		productGroup.DELETE(":id", prodHandler.Delete)
 	}
 
 	r.Run(":8080")
