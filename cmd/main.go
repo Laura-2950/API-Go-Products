@@ -7,25 +7,34 @@ import (
 	"net/http"
 	"os"
 
+	_ "github.com/Laura-2950/API-Go-Products/doc"
 	"github.com/Laura-2950/API-Go-Products/API-Go-Products/cmd/server/handler"
 	"github.com/Laura-2950/API-Go-Products/API-Go-Products/internal/product"
 	"github.com/Laura-2950/API-Go-Products/API-Go-Products/pkg/store"
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-drive/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
-	"github.com/swaggo/gin-swagger"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @title API Go-Products
-// @version 1.0
-// @description This API Handle Products.
+// @title           API-Go-Products
+// @version         1.0
+// @description     Products API example.
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name   API Support
+// @contact.url    http://www.swagger.io/support
+// @contact.email  support@swagger.io
+
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+
 // @host      localhost:8080
 // @BasePath  /products
-// @termsOfService https://developers.com.ar/es_ar/terminos-y-condiciones
-// @contact.name API Support
-// @contact.url https://developers.com.ar/support
-// @license.name Apache 2.0
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @externalDocs.description  OpenAPI
+// @externalDocs.url          http://localhost:8080/swagger/index.html
 func main() {
 
 	fmt.Println("buscando el archivo")
@@ -49,10 +58,10 @@ func main() {
 		panic(errPing.Error())
 	}
 
-	storage := store.SqlStore{db}
-	repo := product.Repository{&storage}
-	serv := product.Service{&repo}
-	prodHandler := handler.ProductHandler{&serv}
+	storage := store.SqlStore{DB: db}
+	repo := product.Repository{Storage: &storage}
+	serv := product.Service{Repository: &repo}
+	prodHandler := handler.ProductHandler{ProductService: &serv}
 	r := gin.Default()
 
 	r.GET("ping", func(ctx *gin.Context) { ctx.String(http.StatusOK, "pong") })
@@ -63,6 +72,6 @@ func main() {
 		productGroup.POST("", prodHandler.NewProduct)
 		productGroup.DELETE(":id", prodHandler.Delete)
 	}
-
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":8080")
 }
