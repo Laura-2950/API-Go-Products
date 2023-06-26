@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "8efd4743-9d0d-4479-ba7b-a05fbade4e09",
+		"name": "API-Go",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17974445"
+	},
+	"item": [
+		{
+			"name": "Get All products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"const product = response[0];\r",
+							"\r",
+							"pm.test(\"All Products\", ()=>{\r",
+							"    pm.expect(product).to.be.an(\"object\");\r",
+							"    pm.expect(product.name).to.eql(\"Oil - Margarine\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/{{GROUP_PRODUCTS}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{GROUP_PRODUCTS}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product By ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"const product = response;\r",
+							"\r",
+							"pm.test(\"All Products\", ()=>{\r",
+							"    pm.expect(product).to.be.an(\"object\");\r",
+							"    pm.expect(product.id).to.eql(2);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/{{GROUP_PRODUCTS}}/:ID",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{GROUP_PRODUCTS}}",
+						":ID"
+					],
+					"variable": [
+						{
+							"key": "ID",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product By Nonexistent ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Products non-existent\", ()=>{\r",
+							"    pm.expect(response).to.be.an(\"object\");\r",
+							"    pm.expect(response.message).to.eql(\"product_id 200 not found\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/{{GROUP_PRODUCTS}}/:ID",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{GROUP_PRODUCTS}}",
+						":ID"
+					],
+					"variable": [
+						{
+							"key": "ID",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"const product = response;\r",
+							"\r",
+							"pm.test(\"Create New Products\", ()=>{\r",
+							"    pm.expect(product).to.be.an(\"object\");\r",
+							"    pm.expect(product.name).to.eql(\"Prueba\");\r",
+							"    pm.expect(product).to.have.property(\"id\").that.exists;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"Prueba\",\r\n        \"quantity\": 10,\r\n        \"code_value\": \"PRUEBA10\",\r\n        \"is_published\": true,\r\n        \"expiration\": \"31/12/2023\",\r\n        \"price\": 10.10\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/{{GROUP_PRODUCTS}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{GROUP_PRODUCTS}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Product without required field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Create New Products without required field\", ()=>{\r",
+							"    pm.expect(response).to.be.an(\"object\");\r",
+							"    pm.expect(response.error).to.eql(\"invalid product\");\r",
+							"    pm.expect(response).to.not.have.property(\"id\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "my_token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"quantity\": 10,\r\n        \"code_value\": \"PRUEBA10\",\r\n        \"is_published\": true,\r\n        \"expiration\": \"15/12/2023\",\r\n        \"price\": 10.10\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/{{GROUP_PRODUCTS}}",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{GROUP_PRODUCTS}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product By ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"pm.test(\"Delete Product by id\", ()=>{\r",
+							"    pm.expect(response).to.be.an(\"object\");\r",
+							"    pm.expect(response).to.eql(\"product removed successfully\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "my_token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/{{GROUP_PRODUCTS}}/:ID",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{GROUP_PRODUCTS}}",
+						":ID"
+					],
+					"variable": [
+						{
+							"key": "ID",
+							"value": "28"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product By Nonexistent ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"pm.test(\"Delete Product by noneexistet ID\", ()=>{\r",
+							"    pm.expect(response).to.be.an(\"object\");\r",
+							"    pm.expect(response.message).to.contain(\"nonexistent product with id\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "my_token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/{{GROUP_PRODUCTS}}/:ID",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"{{GROUP_PRODUCTS}}",
+						":ID"
+					],
+					"variable": [
+						{
+							"key": "ID",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -8,6 +8,10 @@ go get "github.com/go-sql-driver/mysql"
 go get -u github.com/joho/godotenv
 go install github.com/swaggo/swag/cmd/swag@latest
 swag init -g API-Go-Products/cmd/main.go
+
+add documentation:
+swag init ../doc
+
 si hay problemas con el docs.go:
 go get -u github.com/swaggo/swag 
 

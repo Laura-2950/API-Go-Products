@@ -1,0 +1,42 @@
+basePath: /products
+externalDocs:
+  description: OpenAPI
+  url: http://localhost:8080/swagger/index.html
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: Products API example.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: API-Go-Products
+  version: "1.0"
+paths:
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Get all products
+      parameters:
+      - description: token
+        in: header
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: List products
+      tags:
+      - Products
+swagger: "2.0"

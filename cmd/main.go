@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	_ "github.com/Laura-2950/API-Go-Products/doc"
 	"github.com/Laura-2950/API-Go-Products/API-Go-Products/cmd/server/handler"
+	_ "github.com/Laura-2950/API-Go-Products/API-Go-Products/doc"
 	"github.com/Laura-2950/API-Go-Products/API-Go-Products/internal/product"
 	"github.com/Laura-2950/API-Go-Products/API-Go-Products/pkg/store"
 	"github.com/gin-gonic/gin"
@@ -37,7 +37,6 @@ import (
 // @externalDocs.url          http://localhost:8080/swagger/index.html
 func main() {
 
-	fmt.Println("buscando el archivo")
 	err := godotenv.Load(".env")
 	if err != nil {
 		fmt.Println(err)
